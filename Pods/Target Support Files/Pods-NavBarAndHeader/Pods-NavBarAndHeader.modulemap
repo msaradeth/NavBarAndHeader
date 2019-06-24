@@ -1,0 +1,6 @@
+framework module Pods_NavBarAndHeader {
+  umbrella header "Pods-NavBarAndHeader-umbrella.h"
+
+  export *
+  module * { export * }
+}
