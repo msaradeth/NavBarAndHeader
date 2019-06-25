@@ -35,7 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return .all
         }else {
-            return [.portrait, .portraitUpsideDown]
+            return .all
+//            return [.portrait, .portraitUpsideDown]
         }
     }
     
