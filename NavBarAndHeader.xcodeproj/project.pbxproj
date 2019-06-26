@@ -30,6 +30,7 @@
 		5E669DF922C14E8400B0C822 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669DF822C14E8400B0C822 /* Protocols.swift */; };
 		5E669DFF22C16B7300B0C822 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669DFE22C16B7300B0C822 /* DetailCell.swift */; };
 		5E669E0122C16BD700B0C822 /* DetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E0022C16BD700B0C822 /* DetailHeader.swift */; };
+		5E669E0922C3CFE800B0C822 /* DetailVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E0822C3CFE800B0C822 /* DetailVC2.swift */; };
 		932525FD641EFC9D4930A318 /* Pods_NavBarAndHeaderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AEE2B00964F23F0080F814E /* Pods_NavBarAndHeaderTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		5E669DF822C14E8400B0C822 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		5E669DFE22C16B7300B0C822 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		5E669E0022C16BD700B0C822 /* DetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeader.swift; sourceTree = "<group>"; };
+		5E669E0822C3CFE800B0C822 /* DetailVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC2.swift; sourceTree = "<group>"; };
 		6A69FDB1DA679384817D37D2 /* Pods-NavBarAndHeaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NavBarAndHeaderTests.release.xcconfig"; path = "Target Support Files/Pods-NavBarAndHeaderTests/Pods-NavBarAndHeaderTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C651E1841C4D7C482CD061D /* Pods_NavBarAndHeader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NavBarAndHeader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93CE8C216B211DA4AF681E81 /* Pods_NavBarAndHeaderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NavBarAndHeaderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,7 +145,9 @@
 			isa = PBXGroup;
 			children = (
 				5E669DE922C13D1100B0C822 /* Master */,
-				5E669DE422C13A6D00B0C822 /* Detail */,
+				5E669DE422C13A6D00B0C822 /* DetailSelfSizingNib */,
+				5E669E0722C3CDB000B0C822 /* DetailSelfSizingProg */,
+				5E669E0622C3CD7500B0C822 /* DetailFlowLayoutDelegate */,
 				5E669DE022C12A4000B0C822 /* Common */,
 				5E669DDE22C12A1800B0C822 /* Headers */,
 				5E669DDF22C12A2600B0C822 /* NavBars */,
@@ -178,6 +182,7 @@
 		5E669DDE22C12A1800B0C822 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				5E669E0022C16BD700B0C822 /* DetailHeader.swift */,
 				5E669DE222C12B3000B0C822 /* StretchHeader.swift */,
 			);
 			path = Headers;
@@ -209,16 +214,14 @@
 			path = Lib;
 			sourceTree = "<group>";
 		};
-		5E669DE422C13A6D00B0C822 /* Detail */ = {
+		5E669DE422C13A6D00B0C822 /* DetailSelfSizingNib */ = {
 			isa = PBXGroup;
 			children = (
 				5E669DE522C13AA200B0C822 /* DetailVC.swift */,
-				5E669DFE22C16B7300B0C822 /* DetailCell.swift */,
-				5E669E0022C16BD700B0C822 /* DetailHeader.swift */,
 				0E30F0CF22C3ACDD004C0722 /* DetailCell2.swift */,
 				0E30F0D022C3ACDD004C0722 /* DetailCell2.xib */,
 			);
-			path = Detail;
+			path = DetailSelfSizingNib;
 			sourceTree = "<group>";
 		};
 		5E669DE922C13D1100B0C822 /* Master */ = {
@@ -230,6 +233,22 @@
 				5E669DE722C13AE600B0C822 /* EventModel.swift */,
 			);
 			path = Master;
+			sourceTree = "<group>";
+		};
+		5E669E0622C3CD7500B0C822 /* DetailFlowLayoutDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5E669E0822C3CFE800B0C822 /* DetailVC2.swift */,
+			);
+			path = DetailFlowLayoutDelegate;
+			sourceTree = "<group>";
+		};
+		5E669E0722C3CDB000B0C822 /* DetailSelfSizingProg */ = {
+			isa = PBXGroup;
+			children = (
+				5E669DFE22C16B7300B0C822 /* DetailCell.swift */,
+			);
+			path = DetailSelfSizingProg;
 			sourceTree = "<group>";
 		};
 		8D616F370C4A0E25D841FD77 /* Pods */ = {
@@ -493,6 +512,7 @@
 				5E669DE822C13AE600B0C822 /* EventModel.swift in Sources */,
 				5E669DF922C14E8400B0C822 /* Protocols.swift in Sources */,
 				5E669DE322C12B3000B0C822 /* StretchHeader.swift in Sources */,
+				5E669E0922C3CFE800B0C822 /* DetailVC2.swift in Sources */,
 				5E669DF522C146F200B0C822 /* Extensions.swift in Sources */,
 				5E669DFF22C16B7300B0C822 /* DetailCell.swift in Sources */,
 				5E669E0122C16BD700B0C822 /* DetailHeader.swift in Sources */,
@@ -665,7 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QAJNW7456U;
+				DEVELOPMENT_TEAM = LP46D328FV;
 				INFOPLIST_FILE = NavBarAndHeader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -685,7 +705,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QAJNW7456U;
+				DEVELOPMENT_TEAM = LP46D328FV;
 				INFOPLIST_FILE = NavBarAndHeader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

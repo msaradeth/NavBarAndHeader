@@ -41,7 +41,7 @@ class DetailVC: UICollectionViewController {
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCell2.cellIdentifier, for: indexPath) as! DetailCell2
-        cell.configure(item: item)
+        cell.configure(item: item, cellWidth: collectionView.bounds.width-40)
         return cell
     }
     

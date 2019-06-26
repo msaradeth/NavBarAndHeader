@@ -19,14 +19,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="444" height="119"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="titleLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxv-Mt-41H">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="titleLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxv-Mt-41H">
                         <rect key="frame" x="20" y="0.0" width="404" height="25.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detailLabel" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsK-TZ-wxe">
-                        <rect key="frame" x="20" y="33.5" width="404" height="20.5"/>
+                        <rect key="frame" x="20" y="33.5" width="404" height="85.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -38,6 +38,7 @@
                 <constraint firstItem="nsK-TZ-wxe" firstAttribute="top" secondItem="hxv-Mt-41H" secondAttribute="bottom" constant="8" id="7PG-Bp-6mh"/>
                 <constraint firstItem="hxv-Mt-41H" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="OEf-js-QOt"/>
                 <constraint firstItem="nsK-TZ-wxe" firstAttribute="leading" secondItem="hxv-Mt-41H" secondAttribute="leading" id="UB7-Ao-dyu"/>
+                <constraint firstAttribute="bottom" secondItem="nsK-TZ-wxe" secondAttribute="bottom" id="oAi-2S-o4i"/>
                 <constraint firstAttribute="trailing" secondItem="nsK-TZ-wxe" secondAttribute="trailing" constant="20" id="qHV-qp-2op"/>
                 <constraint firstItem="hxv-Mt-41H" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="wYS-jP-W1c"/>
             </constraints>

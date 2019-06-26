@@ -13,17 +13,16 @@ class DetailCell2: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     
-    func configure(item: EventModel) {
+    func configure(item: EventModel, cellWidth: CGFloat) {
+        setupViews(cellWidth: cellWidth)        
         titleLabel.text = item.date
         detailLabel.text = item.description
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
-        
+    func setupViews(cellWidth: CGFloat) {
+        contentView.backgroundColor = .yellow
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.fillSuperview()
+        contentView.widthAnchor.constraint(equalToConstant: cellWidth).isActive = true
     }
-
 }
