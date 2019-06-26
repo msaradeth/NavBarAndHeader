@@ -56,6 +56,7 @@ class DetailCellDelegate: UICollectionViewCell {
     func getCellHeight(item: EventModel, cellWidth: CGFloat) -> CGFloat {
         //update cell with data
         configure(item: item)
+        layoutIfNeeded()
         
         //calc Height
         var cellHeight: CGFloat = padding.top

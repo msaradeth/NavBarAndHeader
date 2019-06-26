@@ -43,7 +43,6 @@ class DetailVC: UICollectionViewController {
                 if customCollectionView.superview != nil {
                     customCollectionView.removeFromSuperview()
                 }
-                flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
                 collectionView.reloadData()
                 
             }else if cellType == .cellSizingWithSizeForItemAtDelegate {
@@ -61,6 +60,7 @@ class DetailVC: UICollectionViewController {
         self.item = event
         self.flowLayout = flowLayout
         self.curSegmentIndex = cellType.rawValue
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize //self cell sizing
         super.init(collectionViewLayout: flowLayout)
         setupViews()
         
@@ -74,12 +74,6 @@ class DetailVC: UICollectionViewController {
     }
     
     func setupViews() {
-        if cellType == .cellSelfsizingWithNibfile || cellType == .cellSelfsizingWithPreferredLayoutAttributesFitting {
-            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        }else {
-            flowLayout.estimatedItemSize = .zero
-        }
-        
         collectionView.backgroundColor = .white
         collectionView.register(DetailCellPreferredLayout.self, forCellWithReuseIdentifier: DetailCellPreferredLayout.cellIdentifier)
         collectionView.register(UINib(nibName: "DetailCell2", bundle: nil), forCellWithReuseIdentifier: DetailCell2.cellIdentifier)

@@ -55,8 +55,9 @@ class DetailCellPreferredLayout: UICollectionViewCell {
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         super.preferredLayoutAttributesFitting(layoutAttributes)
-
+        
         //calc cell height - add up all subviews height of contentView
+        layoutIfNeeded()
         let cellHeight = contentView.subviews.reduce(padding.top, {$0 + $1.bounds.height})
         
         //set cell height and width

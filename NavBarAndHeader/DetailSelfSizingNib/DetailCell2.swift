@@ -23,6 +23,6 @@ class DetailCell2: UICollectionViewCell {
         contentView.backgroundColor = .yellow
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.fillSuperview()
-        contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: cellWidth).isActive = true
+        contentView.widthAnchor.constraint(lessThanOrEqualToConstant: cellWidth).isActive = true
     }
 }

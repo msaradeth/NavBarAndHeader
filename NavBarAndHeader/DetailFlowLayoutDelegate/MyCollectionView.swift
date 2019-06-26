@@ -66,6 +66,7 @@ extension MyCollectionView: UICollectionViewDelegateFlowLayout {
     
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCellDelegate.cellIdentifier, for: indexPath) as! DetailCellDelegate
+            item.description = listOfItems[indexPath.row]
             
             //calc cell width and height
             let cellWidth = collectionView.bounds.width - 40
