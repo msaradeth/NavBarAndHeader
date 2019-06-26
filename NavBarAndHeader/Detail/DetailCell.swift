@@ -15,7 +15,6 @@ class DetailCell: UICollectionViewCell {
         let titleLabel = UILabel(frame: .zero)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = UIFont.systemFont(ofSize: 21, weight: .bold)
-//        titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         titleLabel.numberOfLines = 0
         return titleLabel
     }()
@@ -25,11 +24,8 @@ class DetailCell: UICollectionViewCell {
         detailLabel.numberOfLines = 0
         return detailLabel
     }()
-    var cellHeight: CGFloat {
-        return titleLabel.frame.size.height + detailLabel.frame.size.height + 16
-    }
-    var cellMinHeight: CGFloat {
-        return (superview?.bounds.height ?? 0) - (DetailHeader.defaultHeight + 50)  //navbar + etc. height = 50
+    var minCellHeight: CGFloat {
+        return (superview?.bounds.height ?? 0) - (DetailHeader.defaultHeight + 70)  //need to stretch header
     }
 
     
@@ -58,12 +54,16 @@ class DetailCell: UICollectionViewCell {
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         super.preferredLayoutAttributesFitting(layoutAttributes)
-        guard let superview = superview else { return layoutAttributes}        
-//        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-//        print(size.width, superview.bounds.width)
         
-        layoutAttributes.frame.size.width  = superview.bounds.width - 40
-        layoutAttributes.frame.size.height = max(cellMinHeight, cellHeight)
+        //calc cell height - add up all subview height except index 0 which is contentView
+        var cellHeight: CGFloat = 0
+        for index in 1..<subviews.count {
+            cellHeight += subviews[index].bounds.height
+        }
+   
+        //set cell height and width
+        layoutAttributes.frame.size.height = max(cellHeight, minCellHeight)
+        layoutAttributes.frame.size.width  = (superview?.bounds.width ?? 0) - 40
         return layoutAttributes
     }
 
