@@ -25,7 +25,8 @@ class DetailVC: UICollectionViewController {
 
     func setupViews() {
         collectionView.backgroundColor = .white
-        collectionView.register(DetailCell.self, forCellWithReuseIdentifier: DetailCell.cellIdentifier)
+//        collectionView.register(DetailCell.self, forCellWithReuseIdentifier: DetailCell.cellIdentifier)
+        collectionView.register(UINib(nibName: "DetailCell2", bundle: nil), forCellWithReuseIdentifier: DetailCell2.cellIdentifier)
         collectionView.register(DetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailHeader.cellIdentifier)
     }
     
@@ -39,7 +40,7 @@ class DetailVC: UICollectionViewController {
         return 1
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCell.cellIdentifier, for: indexPath) as! DetailCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCell2.cellIdentifier, for: indexPath) as! DetailCell2
         cell.configure(item: item)
         return cell
     }
