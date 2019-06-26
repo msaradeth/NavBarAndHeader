@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let items = [EventModel]()
         let eventService = EventService()
         let viewModel = MasterViewModel(items: items, eventService: eventService)
-        let flowLayout = StretchHeaderFlowLayout()
+        let flowLayout = StretchHeader()
         let vc = MasterVC(title: "Main", viewModel: viewModel, flowLayout: flowLayout)
         
         let nav = UINavigationController(rootViewController: vc)

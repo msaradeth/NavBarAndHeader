@@ -58,7 +58,7 @@ extension MasterVC: UICollectionViewDataSource {
 }
 extension MasterVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let flowLayout = StretchHeaderFlowLayout()
+        let flowLayout = StretchHeader()
         let detailVC = DetailVC(event: viewModel[indexPath], delegate: viewModel, flowLayout: flowLayout)
         navigationController?.pushViewController(detailVC, animated: true)
     }

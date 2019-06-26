@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: UICollectionViewLayoutAttributes
-class StretchHeaderFlowLayout: UICollectionViewFlowLayout {
+class StretchHeader: UICollectionViewFlowLayout {
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let attributes = super.layoutAttributesForElements(in: rect),

@@ -9,12 +9,12 @@
 import UIKit
 
 class DetailVC: UICollectionViewController {
-    var event: EventModel
+    var item: EventModel
     
     init(event: EventModel, delegate: MasterViewModelDelegagte?, flowLayout: UICollectionViewFlowLayout) {
-        self.event = event
+        self.item = event
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         super.init(collectionViewLayout: flowLayout)
-        flowLayout.estimatedItemSize = CGSize(width: collectionView.bounds.width - 40, height: 100)
         setupViews()
         
         DispatchQueue.main.async {
@@ -31,7 +31,7 @@ class DetailVC: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DetailHeader.cellIdentifier, for: indexPath) as! DetailHeader
-        header.configure(item: event)
+        header.configure(item: item)
         return header
     }
     
@@ -40,7 +40,7 @@ class DetailVC: UICollectionViewController {
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCell.cellIdentifier, for: indexPath) as! DetailCell
-        cell.configure(item: event)
+        cell.configure(item: item)
         return cell
     }
     
