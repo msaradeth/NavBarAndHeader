@@ -9,12 +9,12 @@
 import UIKit
 
 class DetailCell2: UICollectionViewCell {
-    static let cellIdentifier = "Cell"
+    static let cellIdentifier = "DetailCellNibfile"
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     
     func configure(item: EventModel, cellWidth: CGFloat) {
-        setupViews(cellWidth: cellWidth)        
+        setupViews(cellWidth: cellWidth)
         titleLabel.text = item.date
         detailLabel.text = item.description
     }
@@ -23,6 +23,6 @@ class DetailCell2: UICollectionViewCell {
         contentView.backgroundColor = .yellow
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.fillSuperview()
-        contentView.widthAnchor.constraint(equalToConstant: cellWidth).isActive = true
+        contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: cellWidth).isActive = true
     }
 }

@@ -9,6 +9,15 @@
 import UIKit
 
 class MasterVC: UIViewController {
+    var listOfItems = ["An apple is a sweet, edible fruit produced by an apple tree.",
+                "An apricot is a fruit, or the tree that bears the fruit, of several species in the genus Prunus (stone fruits).",
+                "A banana is an edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.",
+                "A grape is a fruit, botanically a berry, of the deciduous woody vines of the flowering plant genus Vitis.",
+                "Kiwifruit, or Chinese gooseberry is the edible berry of several species of woody vines in the genus Actinidia.",
+                "The orange is the fruit of the citrus species Citrus × sinensis in the family Rutaceae. ",
+                "A peach is a soft, juicy and fleshy stone fruit produced by a peach tree."]
+    
+    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +68,9 @@ extension MasterVC: UICollectionViewDataSource {
 extension MasterVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let flowLayout = StretchHeader()
-        let detailVC = DetailVC(event: viewModel[indexPath], delegate: viewModel, flowLayout: flowLayout)
+        listOfItems.insert(viewModel[indexPath].description, at: 0)
+        
+        let detailVC = DetailVC(listOfItems: listOfItems, event: viewModel[indexPath], delegate: viewModel, flowLayout: flowLayout, cellType: .cellSelfsizingWithNibfile)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
