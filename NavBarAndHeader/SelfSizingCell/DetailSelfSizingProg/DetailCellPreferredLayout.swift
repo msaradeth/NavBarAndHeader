@@ -15,7 +15,7 @@ enum CalcLayoutApproch {
 
 class DetailCellPreferredLayout: UICollectionViewCell {
     static let cellIdentifier = "DetailCellPreferredLayout"
-    let padding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    let padding = UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
     var calcLayoutApproch: CalcLayoutApproch = .contentViewSystemLayoutSizeFitting
     
     lazy var titleLabel: UILabel = {
@@ -43,41 +43,42 @@ class DetailCellPreferredLayout: UICollectionViewCell {
     }
     
     private func setupViews() {
-        contentView.backgroundColor = .green
+        contentView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.fillSuperview()
         
         contentView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding.left).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding.right).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding.left).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding.right).isActive = true
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         contentView.addSubview(detailLabel)
         detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding.top).isActive = true
-        detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding.left).isActive = true
-        detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding.right).isActive = true
-        detailLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        detailLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding.left).isActive = true
+        detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding.right).isActive = true
+        detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        super.preferredLayoutAttributesFitting(layoutAttributes)
+        let attributes = super.preferredLayoutAttributesFitting(layoutAttributes)
         if calcLayoutApproch == .contentViewSystemLayoutSizeFitting {
-            return contentViewSizeFiting(layoutAttributes)
+            return doPreferredLayoutAttributesFitting(layoutAttributes)
         }else {
             return sumOfSubviewSize(layoutAttributes)
         }
     }
     
-    
 
-    func contentViewSizeFiting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    
+    //MARK: Self Sizing Cell using contentViewSizeFiting
+    func doPreferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         //calc cell height - contentView.systemLayoutSizeFitting
         layoutIfNeeded()
         let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
         
         //set cell height and width
         layoutAttributes.frame.size.height = size.height
-        layoutAttributes.frame.size.width = (superview?.bounds.width ?? 0) - 40
         return layoutAttributes
     }
     

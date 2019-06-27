@@ -9,75 +9,83 @@
 import UIKit
 
 
-class SelfSizingCellNibfileVC: UICollectionViewController {
+class SelfSizingCellNibfileVC: UICollectionViewController, LoadImageService {
+    var cellWidth: CGFloat {
+        return collectionView.bounds.width - 40
+    }
     var flowLayout: UICollectionViewFlowLayout
     var listOfItems: [String]
     var item: EventModel
     
     
+    //MARK: init and setup ViewController
     init(listOfItems: [String], event: EventModel, flowLayout: UICollectionViewFlowLayout = StretchHeader()) {
         self.listOfItems = listOfItems
         self.item = event
         self.flowLayout = flowLayout
-        self.flowLayout.scrollDirection = .vertical
-        self.flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize //self cell sizing
         super.init(collectionViewLayout: self.flowLayout)
+        title = "Self Sizing Cell"
+        
+        //setup views
         setupViews()
+        
+        //Load image if needed
+        if let image = item.imageCache {
+            item.imageCache = image
+        }else {
+            loadImage(imageUrl: item.imageUrl) { [weak self] (image) in
+                self?.item.imageCache = image
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }                
+            }
+        }
+        
     }
-    
     
     func setupViews() {
         collectionView.backgroundColor = .white
         collectionView.register(UINib(nibName: "DetailCell2", bundle: nil), forCellWithReuseIdentifier: DetailCell2.cellIdentifier)
-//        collectionView.register(DetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailHeader.cellIdentifier)
+        collectionView.register(DetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailHeader.cellIdentifier)
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DetailHeader.cellIdentifier, for: indexPath) as! DetailHeader
-//        header.configure(item: item)
-//        return header
-//    }
+    
+    //MARK: Header and Footer
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DetailHeader.cellIdentifier, for: indexPath) as! DetailHeader
+        header.configure(item: item)
+        return header
+    }
+
+    
+    // MARK: rotation    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 10)
+        flowLayout.invalidateLayout()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+
+//MARK:  UICollectionViewDataSource
+extension SelfSizingCellNibfileVC {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return listOfItems.count
     }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         item.description = listOfItems[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCell2.cellIdentifier, for: indexPath) as! DetailCell2
-        cell.configure(item: item, cellWidth: collectionView.bounds.width-40)
+        cell.configure(item: item)
         return cell
     }
     
-    
-    // MARK: rotation
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//        layout.estimatedItemSize = CGSize(width: view.bounds.size.width, height: 10)
-//        layout.headerReferenceSize = .init(width: view.bounds.size.width, height: 30)
-//        layout.invalidateLayout()
-        
-        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        flowLayout.invalidateLayout()
-//        collectionView.collectionViewLayout.invalidateLayout()
-        super.traitCollectionDidChange(previousTraitCollection)
-    }
-    
-    // MARK: layout - set estimated width to collection view width (minus content inset etc)
-//    lazy var layout: UICollectionViewFlowLayout = {
-//        let layout = EstimatedWidthCellsFlowLayout()
-//        layout.headerReferenceSize = .init(width: view.bounds.size.width, height: 30)
-//        layout.scrollDirection = .vertical
-//        return layout
-//    }()
-//
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        collectionView.collectionViewLayout.invalidateLayout()
-//    }
-//
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 //MARK: UICollectionViewDelegateFlowLayout

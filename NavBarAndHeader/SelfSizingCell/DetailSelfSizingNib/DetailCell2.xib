@@ -33,6 +33,7 @@
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" red="0.90422603629999998" green="0.90422603629999998" blue="0.90422603629999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hxv-Mt-41H" secondAttribute="trailing" constant="20" id="5kC-qc-BIT"/>
                 <constraint firstItem="nsK-TZ-wxe" firstAttribute="top" secondItem="hxv-Mt-41H" secondAttribute="bottom" constant="8" id="7PG-Bp-6mh"/>

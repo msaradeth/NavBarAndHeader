@@ -32,42 +32,33 @@ class MainVC: UICollectionViewController {
 
     init(flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()) {
         self.flowLayout = flowLayout
-        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-//        flowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width-40, height: 100)
         super.init(collectionViewLayout: flowLayout)
+        self.title = "CollectionView"
+        
+        //Setup views
+        setupViews()
+
+        //Load Data
         items.append(contentsOf: listOfItems)
-        
-        title = "CollectionView"
-        collectionView.backgroundColor = .white
-        collectionView.register(MainCell.self, forCellWithReuseIdentifier: MainCell.reuseIdentifier)
-        
         let eventAPI = EventService()
         eventAPI.loadData { [weak self] (events) in
             self?.listOfEvents = events
-//            print(self?.listOfEvents)
         }
-        DispatchQueue.main.async {
-//            self.collectionView.reloadData()
-        }
+
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        if let flowLayout = collectionView.collectionViewLayout ? UICollectionViewFlowLayout {
-//            flowLayout.
-//        }
-        // Register cell
+    func setupViews() {
+        flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 100)
+        collectionView.backgroundColor = .white
+        collectionView.register(MainCell.self, forCellWithReuseIdentifier: MainCell.reuseIdentifier)
     }
 
+    
     // MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCell.reuseIdentifier, for: indexPath) as! MainCell
         // Configure the cell
@@ -75,78 +66,37 @@ class MainVC: UICollectionViewController {
         return cell
     }
 
+    
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.row < listOfEvents.count else { return }
         let event = listOfEvents[indexPath.row]
-        var listOfTexts = listOfItems
-        listOfTexts.insert(event.description, at: 0)
+        var items = listOfEvents.map{ $0.description }
+        items.insert(event.description, at: 0)
+        items.append(contentsOf: listOfItems)
         
         switch indexPath.row {
         case 0:
-            let vc = SelfSizingCellNibfileVC(listOfItems: listOfTexts, event: event)
+            let vc = SelfSizingCellNibfileVC(listOfItems: items, event: event)
             navigationController?.pushViewController(vc, animated: true)
         default:
-            break
+            let vc = DetailVC(listOfItems: items, event: event, flowLayout: StretchHeader(), cellType: CellType.cellSelfsizingWithNibfile)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-//        collectionView.reloadData()
-        collectionView.collectionViewLayout.invalidateLayout()
-        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+
+    
+    //MARK: rotation
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 100)
         flowLayout.invalidateLayout()
     }
-
     
-//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//        //        layout.estimatedItemSize = CGSize(width: view.bounds.size.width, height: 10)
-//        //        layout.headerReferenceSize = .init(width: view.bounds.size.width, height: 30)
-//        //        layout.invalidateLayout()
-//
-//        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-//        flowLayout.invalidateLayout()
-//        //        collectionView.collectionViewLayout.invalidateLayout()
-//        super.traitCollectionDidChange(previousTraitCollection)
-//    }
-    
-    // MARK: layout - set estimated width to collection view width (minus content inset etc)
-    //    lazy var layout: UICollectionViewFlowLayout = {
-    //        let layout = EstimatedWidthCellsFlowLayout()
-    //        layout.headerReferenceSize = .init(width: view.bounds.size.width, height: 30)
-    //        layout.scrollDirection = .vertical
-    //        return layout
-    //    }()
-    //
-
-    
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }
+
+

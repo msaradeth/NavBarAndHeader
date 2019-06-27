@@ -71,7 +71,7 @@ extension MasterVC: UICollectionViewDelegate {
         var items = listOfItems
         items.insert(viewModel[indexPath].description, at: 0)
         
-        let detailVC = DetailVC(listOfItems: items, event: viewModel[indexPath], delegate: viewModel, flowLayout: flowLayout, cellType: .cellSelfsizingWithNibfile)
+        let detailVC = DetailVC(listOfItems: items, event: viewModel[indexPath], flowLayout: flowLayout, cellType: .cellSelfsizingWithNibfile)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

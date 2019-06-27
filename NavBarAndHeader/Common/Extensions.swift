@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func fillSuperview() {
+    func fillSuperview(padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
         guard let superview = self.superview else { return }
-        topAnchor.constraint(equalTo: superview.topAnchor).isActive = true
-        leadingAnchor.constraint(equalTo: superview.leadingAnchor).isActive = true
-        trailingAnchor.constraint(equalTo: superview.trailingAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
+        topAnchor.constraint(equalTo: superview.topAnchor, constant: padding.top).isActive = true
+        leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: padding.left).isActive = true
+        trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -padding.right).isActive = true
+        bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -padding.bottom).isActive = true
     }
     
     func anchor(topView: UIView, leadingView: UIView, trailingView: UIView, bottomView: UIView, padding: UIEdgeInsets) {

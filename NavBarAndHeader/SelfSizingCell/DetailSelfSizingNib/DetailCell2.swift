@@ -13,16 +13,19 @@ class DetailCell2: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     
-    func configure(item: EventModel, cellWidth: CGFloat) {
-        setupViews(cellWidth: cellWidth)
+    func configure(item: EventModel) {
         titleLabel.text = item.date
         detailLabel.text = item.description
     }
     
-    func setupViews(cellWidth: CGFloat) {
-        contentView.backgroundColor = .yellow
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.fillSuperview()
-        contentView.widthAnchor.constraint(lessThanOrEqualToConstant: cellWidth).isActive = true
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        //calc cell height - contentView.systemLayoutSizeFitting
+        layoutIfNeeded()
+        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+        
+        //set cell height and width
+        layoutAttributes.frame.size.height = size.height
+        return layoutAttributes
     }
+
 }

@@ -37,37 +37,34 @@ class DetailCellDelegate: UICollectionViewCell {
     }
     
     private func setupViews() {
-        contentView.backgroundColor = UIColor.cyan
+        contentView.backgroundColor = UIColor.cyan.withAlphaComponent(0.5)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.fillSuperview()
         
         contentView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding.left).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding.right).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding.left).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding.right).isActive = true
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         contentView.addSubview(detailLabel)
         detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding.top).isActive = true
-        detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding.left).isActive = true
-        detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding.right).isActive = true
-        detailLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        detailLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding.left).isActive = true
+        detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding.right).isActive = true
     }
+    
 
-    func getCellHeight(item: EventModel, cellWidth: CGFloat) -> CGFloat {
-        //update cell with data
-        configure(item: item)
-        layoutIfNeeded()
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        guard let superview = superview else { return layoutAttributes }
         
-        //calc Height
-        var cellHeight: CGFloat = padding.top
-        contentView.subviews.forEach { (subview) in
-            if subview is UILabel {
-                if let label = subview as? UILabel {
-                    cellHeight += label.text?.getHeight(constraintedWidth: cellWidth, font: label.font) ?? 0
-                }
-            }
-        }
-        return cellHeight
+        //calc cell height - contentView.systemLayoutSizeFitting
+        setNeedsLayout()
+        layoutIfNeeded()
+        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+        
+        //set cell height and width
+        layoutAttributes.frame.size.height = size.height
+        return layoutAttributes
     }
     
     override func prepareForReuse() {
