@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0E30F0D122C3ACDD004C0722 /* DetailCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30F0CF22C3ACDD004C0722 /* DetailCell2.swift */; };
 		0E30F0D222C3ACDD004C0722 /* DetailCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E30F0D022C3ACDD004C0722 /* DetailCell2.xib */; };
+		0EF0228522C4E3B900ED3569 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0228422C4E3B900ED3569 /* MainVC.swift */; };
+		0EF0228822C4E55500ED3569 /* SelfSizingCellNibfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0228722C4E55500ED3569 /* SelfSizingCellNibfileVC.swift */; };
+		0EF0228A22C4E73300ED3569 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0228922C4E73300ED3569 /* MainCell.swift */; };
 		0F3D116048DE649DB8DC22CD /* Pods_NavBarAndHeaderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CE8C216B211DA4AF681E81 /* Pods_NavBarAndHeaderUITests.framework */; };
 		4ED1C8D3F80C898925B860B3 /* Pods_NavBarAndHeader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C651E1841C4D7C482CD061D /* Pods_NavBarAndHeader.framework */; };
 		5E669DB122C129FA00B0C822 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669DB022C129FA00B0C822 /* AppDelegate.swift */; };
@@ -56,6 +59,9 @@
 		085484A9662D42702138E07E /* Pods-NavBarAndHeaderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NavBarAndHeaderUITests.release.xcconfig"; path = "Target Support Files/Pods-NavBarAndHeaderUITests/Pods-NavBarAndHeaderUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0E30F0CF22C3ACDD004C0722 /* DetailCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell2.swift; sourceTree = "<group>"; };
 		0E30F0D022C3ACDD004C0722 /* DetailCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell2.xib; sourceTree = "<group>"; };
+		0EF0228422C4E3B900ED3569 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		0EF0228722C4E55500ED3569 /* SelfSizingCellNibfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingCellNibfileVC.swift; sourceTree = "<group>"; };
+		0EF0228922C4E73300ED3569 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		149BE6084373216900C51B82 /* Pods-NavBarAndHeader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NavBarAndHeader.debug.xcconfig"; path = "Target Support Files/Pods-NavBarAndHeader/Pods-NavBarAndHeader.debug.xcconfig"; sourceTree = "<group>"; };
 		1AEE2B00964F23F0080F814E /* Pods_NavBarAndHeaderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NavBarAndHeaderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		335A8E6132B52216FCE049B0 /* Pods-NavBarAndHeaderUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NavBarAndHeaderUITests.debug.xcconfig"; path = "Target Support Files/Pods-NavBarAndHeaderUITests/Pods-NavBarAndHeaderUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,12 +130,22 @@
 		0EEB74FD22C46D9100FA2A7B /* SelfSizingCell */ = {
 			isa = PBXGroup;
 			children = (
+				0EF0228622C4E3BE00ED3569 /* Main */,
 				5E669DE922C13D1100B0C822 /* Master */,
 				5E669DE422C13A6D00B0C822 /* DetailSelfSizingNib */,
 				5E669E0722C3CDB000B0C822 /* DetailSelfSizingProg */,
 				5E669E0622C3CD7500B0C822 /* DetailFlowLayoutDelegate */,
 			);
 			path = SelfSizingCell;
+			sourceTree = "<group>";
+		};
+		0EF0228622C4E3BE00ED3569 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0EF0228422C4E3B900ED3569 /* MainVC.swift */,
+				0EF0228922C4E73300ED3569 /* MainCell.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		5E669DA422C129FA00B0C822 = {
@@ -227,6 +243,7 @@
 		5E669DE422C13A6D00B0C822 /* DetailSelfSizingNib */ = {
 			isa = PBXGroup;
 			children = (
+				0EF0228722C4E55500ED3569 /* SelfSizingCellNibfileVC.swift */,
 				0E30F0CF22C3ACDD004C0722 /* DetailCell2.swift */,
 				0E30F0D022C3ACDD004C0722 /* DetailCell2.xib */,
 			);
@@ -511,6 +528,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF0228822C4E55500ED3569 /* SelfSizingCellNibfileVC.swift in Sources */,
 				5E669DF322C140CF00B0C822 /* MasterViewModel.swift in Sources */,
 				0E30F0D122C3ACDD004C0722 /* DetailCell2.swift in Sources */,
 				5E669DEB22C13D3300B0C822 /* MasterVC.swift in Sources */,
@@ -518,11 +536,13 @@
 				5E669E0D22C3FAEC00B0C822 /* MyCollectionView.swift in Sources */,
 				5E669DF722C1491900B0C822 /* MasterCell.swift in Sources */,
 				5E669DF022C13F1400B0C822 /* HttpHelp.swift in Sources */,
+				0EF0228A22C4E73300ED3569 /* MainCell.swift in Sources */,
 				5E669DE622C13AA200B0C822 /* DetailVC.swift in Sources */,
 				5E669E0B22C3D85800B0C822 /* DetailCellDelegate.swift in Sources */,
 				5E669DB122C129FA00B0C822 /* AppDelegate.swift in Sources */,
 				5E669DF122C13F1400B0C822 /* Reachability.swift in Sources */,
 				5E669DE822C13AE600B0C822 /* EventModel.swift in Sources */,
+				0EF0228522C4E3B900ED3569 /* MainVC.swift in Sources */,
 				5E669DF922C14E8400B0C822 /* Protocols.swift in Sources */,
 				5E669DE322C12B3000B0C822 /* StretchHeader.swift in Sources */,
 				5E669DF522C146F200B0C822 /* Extensions.swift in Sources */,

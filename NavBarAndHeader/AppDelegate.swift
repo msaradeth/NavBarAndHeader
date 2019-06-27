@@ -16,13 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let items = [EventModel]()
-        let eventService = EventService()
-        let viewModel = MasterViewModel(items: items, eventService: eventService)
-        let flowLayout = StretchHeader()
-        let vc = MasterVC(title: "Main", viewModel: viewModel, flowLayout: flowLayout)
+//        let items = [EventModel]()
+//        let eventService = EventService()
+//        let viewModel = MasterViewModel(items: items, eventService: eventService)
+//        let flowLayout = StretchHeader()
+//        let vc = MasterVC(title: "Main", viewModel: viewModel, flowLayout: flowLayout)
+//        let nav = UINavigationController(rootViewController: vc)
         
-        let nav = UINavigationController(rootViewController: vc)
+        let nav = UINavigationController(rootViewController: MainVC())
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
