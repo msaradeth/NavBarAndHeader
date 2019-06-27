@@ -8,9 +8,15 @@
 
 import UIKit
 
+enum CalcLayoutApproch {
+    case sumOfSubviewSize
+    case contentViewSystemLayoutSizeFitting
+}
+
 class DetailCellPreferredLayout: UICollectionViewCell {
     static let cellIdentifier = "DetailCellPreferredLayout"
     let padding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    var calcLayoutApproch: CalcLayoutApproch = .contentViewSystemLayoutSizeFitting
     
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel(frame: .zero)
@@ -55,7 +61,28 @@ class DetailCellPreferredLayout: UICollectionViewCell {
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         super.preferredLayoutAttributesFitting(layoutAttributes)
+        if calcLayoutApproch == .contentViewSystemLayoutSizeFitting {
+            return contentViewSizeFiting(layoutAttributes)
+        }else {
+            return sumOfSubviewSize(layoutAttributes)
+        }
+    }
+    
+    
+
+    func contentViewSizeFiting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        //calc cell height - contentView.systemLayoutSizeFitting
+        layoutIfNeeded()
+        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
         
+        //set cell height and width
+        layoutAttributes.frame.size.height = size.height
+        layoutAttributes.frame.size.width = (superview?.bounds.width ?? 0) - 40
+        return layoutAttributes
+    }
+    
+    
+    func sumOfSubviewSize(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         //calc cell height - add up all subviews height of contentView
         layoutIfNeeded()
         let cellHeight = contentView.subviews.reduce(padding.top, {$0 + $1.bounds.height})
@@ -63,8 +90,10 @@ class DetailCellPreferredLayout: UICollectionViewCell {
         //set cell height and width
         layoutAttributes.frame.size.height = cellHeight
         layoutAttributes.frame.size.width  = (superview?.bounds.width ?? 0) - 40
+        
         return layoutAttributes
     }
+
     
     override func prepareForReuse() {
         super.prepareForReuse()

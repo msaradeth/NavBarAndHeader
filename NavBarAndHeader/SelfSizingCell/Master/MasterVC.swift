@@ -68,9 +68,10 @@ extension MasterVC: UICollectionViewDataSource {
 extension MasterVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let flowLayout = StretchHeader()
-        listOfItems.insert(viewModel[indexPath].description, at: 0)
+        var items = listOfItems
+        items.insert(viewModel[indexPath].description, at: 0)
         
-        let detailVC = DetailVC(listOfItems: listOfItems, event: viewModel[indexPath], delegate: viewModel, flowLayout: flowLayout, cellType: .cellSelfsizingWithNibfile)
+        let detailVC = DetailVC(listOfItems: items, event: viewModel[indexPath], delegate: viewModel, flowLayout: flowLayout, cellType: .cellSelfsizingWithNibfile)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

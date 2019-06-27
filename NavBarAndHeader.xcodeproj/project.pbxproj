@@ -121,6 +121,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EEB74FD22C46D9100FA2A7B /* SelfSizingCell */ = {
+			isa = PBXGroup;
+			children = (
+				5E669DE922C13D1100B0C822 /* Master */,
+				5E669DE422C13A6D00B0C822 /* DetailSelfSizingNib */,
+				5E669E0722C3CDB000B0C822 /* DetailSelfSizingProg */,
+				5E669E0622C3CD7500B0C822 /* DetailFlowLayoutDelegate */,
+			);
+			path = SelfSizingCell;
+			sourceTree = "<group>";
+		};
 		5E669DA422C129FA00B0C822 = {
 			isa = PBXGroup;
 			children = (
@@ -146,10 +157,7 @@
 		5E669DAF22C129FA00B0C822 /* NavBarAndHeader */ = {
 			isa = PBXGroup;
 			children = (
-				5E669DE922C13D1100B0C822 /* Master */,
-				5E669DE422C13A6D00B0C822 /* DetailSelfSizingNib */,
-				5E669E0722C3CDB000B0C822 /* DetailSelfSizingProg */,
-				5E669E0622C3CD7500B0C822 /* DetailFlowLayoutDelegate */,
+				0EEB74FD22C46D9100FA2A7B /* SelfSizingCell */,
 				5E669DE022C12A4000B0C822 /* Common */,
 				5E669DDE22C12A1800B0C822 /* Headers */,
 				5E669DDF22C12A2600B0C822 /* NavBars */,
@@ -689,7 +697,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LP46D328FV;
+				DEVELOPMENT_TEAM = QAJNW7456U;
 				INFOPLIST_FILE = NavBarAndHeader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -709,7 +717,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LP46D328FV;
+				DEVELOPMENT_TEAM = QAJNW7456U;
 				INFOPLIST_FILE = NavBarAndHeader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

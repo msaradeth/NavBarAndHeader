@@ -63,12 +63,9 @@ class DetailVC: UICollectionViewController {
         flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize //self cell sizing
         super.init(collectionViewLayout: flowLayout)
         setupViews()
-        
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
     }
     
+
     @objc func segmentSelected(sender: UISegmentedControl) {
         curSegmentIndex = sender.selectedSegmentIndex
     }
