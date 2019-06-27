@@ -43,4 +43,42 @@ extension String {
 }
 
 
+extension UINavigationBar {
+    func transparent() {
+        setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        shadowImage = UIImage()
+    }
+    func visible() {
+        setBackgroundImage(nil, for: .default)
+        shadowImage = nil
+    }
+}
+
+extension UISearchBar {
+    static func setSearchBarAppearance() {
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .darkGray
+        let attributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.white]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = attributes
+    }
+}
+
+extension UICollectionViewFlowLayout {
+    func availableHeight(collectionViewHeight: CGFloat, numberOfRows: CGFloat, navigationBarHeight: CGFloat) -> CGFloat {
+        let availableHeight = collectionViewHeight
+            - self.sectionInset.top - self.sectionInset.bottom
+            - (self.minimumInteritemSpacing * numberOfRows)
+            - navigationBarHeight
+        return availableHeight
+    }
+    
+    func availableWidth(collectionViewWidth: CGFloat, numberOfColumns: CGFloat) -> CGFloat {
+        let availableWidth = collectionViewWidth
+            - self.sectionInset.left - self.sectionInset.right
+            - (self.minimumInteritemSpacing * numberOfColumns)
+        return availableWidth
+    }
+}
+
+
+
 

@@ -36,6 +36,11 @@
 		5E669E0B22C3D85800B0C822 /* DetailCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E0A22C3D85800B0C822 /* DetailCellDelegate.swift */; };
 		5E669E0D22C3FAEC00B0C822 /* MyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E0C22C3FAEC00B0C822 /* MyCollectionView.swift */; };
 		5E669E2822C54C1400B0C822 /* LayoutDelegateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E2722C54C1400B0C822 /* LayoutDelegateVC.swift */; };
+		5E669E2F22C56E1500B0C822 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E2A22C56E1500B0C822 /* Movie.swift */; };
+		5E669E3022C56E1500B0C822 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E2B22C56E1500B0C822 /* MovieService.swift */; };
+		5E669E3122C56E1500B0C822 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E2C22C56E1500B0C822 /* MovieCell.swift */; };
+		5E669E3222C56E1500B0C822 /* MovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E2D22C56E1500B0C822 /* MovieVC.swift */; };
+		5E669E3322C56E1500B0C822 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E669E2E22C56E1500B0C822 /* MovieViewModel.swift */; };
 		932525FD641EFC9D4930A318 /* Pods_NavBarAndHeaderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AEE2B00964F23F0080F814E /* Pods_NavBarAndHeaderTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +99,11 @@
 		5E669E0A22C3D85800B0C822 /* DetailCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellDelegate.swift; sourceTree = "<group>"; };
 		5E669E0C22C3FAEC00B0C822 /* MyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionView.swift; sourceTree = "<group>"; };
 		5E669E2722C54C1400B0C822 /* LayoutDelegateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutDelegateVC.swift; sourceTree = "<group>"; };
+		5E669E2A22C56E1500B0C822 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		5E669E2B22C56E1500B0C822 /* MovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		5E669E2C22C56E1500B0C822 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		5E669E2D22C56E1500B0C822 /* MovieVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieVC.swift; sourceTree = "<group>"; };
+		5E669E2E22C56E1500B0C822 /* MovieViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		6A69FDB1DA679384817D37D2 /* Pods-NavBarAndHeaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NavBarAndHeaderTests.release.xcconfig"; path = "Target Support Files/Pods-NavBarAndHeaderTests/Pods-NavBarAndHeaderTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C651E1841C4D7C482CD061D /* Pods_NavBarAndHeader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NavBarAndHeader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93CE8C216B211DA4AF681E81 /* Pods_NavBarAndHeaderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NavBarAndHeaderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,8 +142,8 @@
 		0EEB74FD22C46D9100FA2A7B /* SelfSizingCell */ = {
 			isa = PBXGroup;
 			children = (
-				5E669E2922C56DB800B0C822 /* TheMovie */,
 				0EF0228622C4E3BE00ED3569 /* Main */,
+				5E669E2922C56DB800B0C822 /* TheMovie */,
 				5E669DE922C13D1100B0C822 /* Master */,
 				5E669DE422C13A6D00B0C822 /* DetailSelfSizingNib */,
 				5E669E0722C3CDB000B0C822 /* DetailSelfSizingProg */,
@@ -286,6 +296,11 @@
 		5E669E2922C56DB800B0C822 /* TheMovie */ = {
 			isa = PBXGroup;
 			children = (
+				5E669E2D22C56E1500B0C822 /* MovieVC.swift */,
+				5E669E2E22C56E1500B0C822 /* MovieViewModel.swift */,
+				5E669E2A22C56E1500B0C822 /* Movie.swift */,
+				5E669E2C22C56E1500B0C822 /* MovieCell.swift */,
+				5E669E2B22C56E1500B0C822 /* MovieService.swift */,
 			);
 			path = TheMovie;
 			sourceTree = "<group>";
@@ -542,14 +557,18 @@
 				0EF0228822C4E55500ED3569 /* SelfSizingCellNibfileVC.swift in Sources */,
 				5E669DF322C140CF00B0C822 /* MasterViewModel.swift in Sources */,
 				0E30F0D122C3ACDD004C0722 /* DetailCell2.swift in Sources */,
+				5E669E2F22C56E1500B0C822 /* Movie.swift in Sources */,
 				5E669DEB22C13D3300B0C822 /* MasterVC.swift in Sources */,
+				5E669E3222C56E1500B0C822 /* MovieVC.swift in Sources */,
 				5E669DB322C129FA00B0C822 /* ViewController.swift in Sources */,
+				5E669E3022C56E1500B0C822 /* MovieService.swift in Sources */,
 				5E669E0D22C3FAEC00B0C822 /* MyCollectionView.swift in Sources */,
 				5E669DF722C1491900B0C822 /* MasterCell.swift in Sources */,
 				5E669DF022C13F1400B0C822 /* HttpHelp.swift in Sources */,
 				0EF0228A22C4E73300ED3569 /* MainCell.swift in Sources */,
 				5E669DE622C13AA200B0C822 /* DetailVC.swift in Sources */,
 				5E669E0B22C3D85800B0C822 /* DetailCellDelegate.swift in Sources */,
+				5E669E3322C56E1500B0C822 /* MovieViewModel.swift in Sources */,
 				5E669DB122C129FA00B0C822 /* AppDelegate.swift in Sources */,
 				5E669DF122C13F1400B0C822 /* Reachability.swift in Sources */,
 				5E669E2822C54C1400B0C822 /* LayoutDelegateVC.swift in Sources */,
@@ -560,6 +579,7 @@
 				5E669DF522C146F200B0C822 /* Extensions.swift in Sources */,
 				5E669DFF22C16B7300B0C822 /* DetailCellPreferredLayout.swift in Sources */,
 				5E669E0122C16BD700B0C822 /* DetailHeader.swift in Sources */,
+				5E669E3122C56E1500B0C822 /* MovieCell.swift in Sources */,
 				5E669DED22C13DF600B0C822 /* EventService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

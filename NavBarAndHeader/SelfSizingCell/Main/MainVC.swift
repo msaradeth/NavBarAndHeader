@@ -22,7 +22,7 @@ class MainVC: UICollectionViewController {
     var items = [
         "SelfSizing Cell With Nibfile",
         "SelfSizing PreferredLayoutAttributesFitting",
-        "SizeForItemAt indexPath",
+        "The Movie",
     ]
     var cellWidth: CGFloat {
         return collectionView.bounds.width - 40
@@ -45,6 +45,11 @@ class MainVC: UICollectionViewController {
             self?.listOfEvents = events
         }
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "Collection View"
     }
     
     func setupViews() {
@@ -77,11 +82,19 @@ class MainVC: UICollectionViewController {
         
         switch indexPath.row {
         case 0:
+            fallthrough
+        case 1:
             let vc = SelfSizingCellNibfileVC(listOfItems: items, event: event)
             navigationController?.pushViewController(vc, animated: true)
-        default:
-            let vc = DetailVC(listOfItems: items, event: event, flowLayout: StretchHeader(), cellType: CellType.cellSelfsizingWithNibfile)
+            
+        case 2:
+            title = ""
+            let movieService = MovieService()
+            let viewModel = MovieViewModel(movies: [], movieService: movieService)
+            let vc = MovieVC(viewModel: viewModel, query: "Avenger")
             navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
         }
     }
 
