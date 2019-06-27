@@ -53,7 +53,7 @@ class MovieVC: UICollectionViewController {
 //        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    //MARK: viewWillTransition
+    //MARK: Handle Rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
@@ -97,11 +97,11 @@ extension MovieVC: UICollectionViewDelegateFlowLayout {
         flowLayout.minimumLineSpacing = 0
         
         //Number of rows and columns
-        let numberOfRows: CGFloat = 2
-        var numberOfColumns: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 3
+        let numberOfRows: CGFloat = 3
+        var numberOfColumns: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 6
         if UIDevice.current.userInterfaceIdiom == .pad
             && (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) {
-            numberOfColumns = 4
+            numberOfColumns = 5
         }
 
         //Calc available width and height
@@ -110,7 +110,8 @@ extension MovieVC: UICollectionViewDelegateFlowLayout {
         
         //Calc Cell width and height
         let cellWidth = availableWidth / numberOfColumns
-        let cellHeight = availableHeight / numberOfRows
+        let cellHeight = cellWidth * 1.3    //make Height a little longer
+//        let cellHeight = availableHeight / numberOfRows
         return CGSize(width: cellWidth, height: cellHeight)
     }
 }

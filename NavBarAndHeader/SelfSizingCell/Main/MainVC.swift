@@ -82,9 +82,11 @@ class MainVC: UICollectionViewController {
         
         switch indexPath.row {
         case 0:
-            fallthrough
-        case 1:
             let vc = SelfSizingCellNibfileVC(listOfItems: items, event: event)
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case 1:
+            let vc = DetailVC(listOfItems: items, event: event, flowLayout: StretchHeader(), cellType: .cellSelfsizingWithNibfile)
             navigationController?.pushViewController(vc, animated: true)
             
         case 2:
