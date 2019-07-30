@@ -86,7 +86,7 @@ class MainVC: UICollectionViewController {
             navigationController?.pushViewController(vc, animated: true)
             
         case 1:
-            let vc = DetailVC(listOfItems: items, event: event, flowLayout: StretchHeader(), cellType: .cellSelfsizingWithNibfile)
+            let vc = DetailVC(listOfItems: items, event: event, flowLayout: StretchHeader(), cellType: .cellSelfsizingWithPreferredLayoutAttributesFitting)
             navigationController?.pushViewController(vc, animated: true)
             
         case 2:

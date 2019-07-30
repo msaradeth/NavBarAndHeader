@@ -37,17 +37,6 @@ class MovieCell: UICollectionViewCell {
         }
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        //Get cell Height
-        setNeedsLayout()
-        layoutIfNeeded()
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        
-        //set cell size
-        layoutAttributes.size.height = size.height
-        
-        return layoutAttributes
-    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -26,14 +26,10 @@ enum CellType: Int {
 
 class DetailVC: UICollectionViewController, LoadImageService {
     var cellWidth: CGFloat {
-        return collectionView.bounds.width - 40
+        let cellWidth = UIDevice.current.orientation == .portrait ?  collectionView.bounds.width : collectionView.bounds.width / 2.0
+        return cellWidth - 10
     }
-    lazy var customCollectionView: MyCollectionView = {
-        let customCollectionView = MyCollectionView(listOfItems: self.listOfItems, item: self.item, flowLayout: StretchHeader())
-        customCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        return customCollectionView
-    }()
-    var flowLayout: UICollectionViewFlowLayout
+
     var cellType: CellType {
         return CellType.withValue(curSegmentIndex)
     }
@@ -51,8 +47,8 @@ class DetailVC: UICollectionViewController, LoadImageService {
     init(listOfItems: [String], event: EventModel, flowLayout: UICollectionViewFlowLayout, cellType: CellType) {
         self.listOfItems = listOfItems
         self.item = event
-        self.flowLayout = flowLayout
         self.curSegmentIndex = cellType.rawValue
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         super.init(collectionViewLayout: flowLayout)
         
         //setup views
@@ -78,7 +74,6 @@ class DetailVC: UICollectionViewController, LoadImageService {
     
     func setupViews() {
         //CollectionView
-        flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 100)
         collectionView.backgroundColor = .white
         collectionView.register(DetailCellPreferredLayout.self, forCellWithReuseIdentifier: DetailCellPreferredLayout.cellIdentifier)
         collectionView.register(UINib(nibName: "DetailCell2", bundle: nil), forCellWithReuseIdentifier: DetailCell2.cellIdentifier)
@@ -91,6 +86,7 @@ class DetailVC: UICollectionViewController, LoadImageService {
         navigationItem.titleView = segmentedControl
     }
     
+    
     //MARK: header and footer
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DetailHeader.cellIdentifier, for: indexPath) as! DetailHeader
@@ -100,10 +96,19 @@ class DetailVC: UICollectionViewController, LoadImageService {
     
     
     //MARK: Handle Rotation
+//    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.willTransition(to: newCollection, with: coordinator)
+//        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.estimatedItemSize = CGSize(width: self.cellWidth, height: 100)
+//            flowLayout.invalidateLayout()
+//        }
+//    }
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.flowLayout.estimatedItemSize = CGSize(width: self.cellWidth, height: 100)
-        self.flowLayout.invalidateLayout()
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: self.cellWidth, height: 100)
+            flowLayout.invalidateLayout()
+        }
     }
   
     
@@ -142,7 +147,7 @@ extension DetailVC {
 extension DetailVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: DetailHeader.defaultHeight)
+        return CGSize(width: collectionView.bounds.width, height: DetailHeader.defaultHeight)
     }
     
 }

@@ -31,6 +31,7 @@ class MasterVC: UIViewController {
     var flowLayout: UICollectionViewFlowLayout
     
     init(title: String, viewModel: MasterViewModel, flowLayout: UICollectionViewFlowLayout) {
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         self.viewModel = viewModel
         self.flowLayout = flowLayout
         super.init(nibName: nil, bundle: nil)

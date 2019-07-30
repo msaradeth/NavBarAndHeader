@@ -12,20 +12,17 @@ class DetailCell2: UICollectionViewCell {
     static let cellIdentifier = "DetailCellNibfile"
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     
     func configure(item: EventModel) {
         titleLabel.text = item.date
         detailLabel.text = item.description
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        //calc cell height - contentView.systemLayoutSizeFitting
-        layoutIfNeeded()
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        
-        //set cell height and width
-        layoutAttributes.frame.size.height = size.height
-        return layoutAttributes
-    }
 
+    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+        widthConstraint.constant = bounds.size.width
+        return contentView.systemLayoutSizeFitting(targetSize)
+    }
 }

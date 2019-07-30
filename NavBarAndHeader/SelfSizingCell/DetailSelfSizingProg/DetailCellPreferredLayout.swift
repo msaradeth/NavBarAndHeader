@@ -8,15 +8,10 @@
 
 import UIKit
 
-enum CalcLayoutApproch {
-    case sumOfSubviewSize
-    case contentViewSystemLayoutSizeFitting
-}
 
 class DetailCellPreferredLayout: UICollectionViewCell {
     static let cellIdentifier = "DetailCellPreferredLayout"
     let padding = UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
-    var calcLayoutApproch: CalcLayoutApproch = .contentViewSystemLayoutSizeFitting
     
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel(frame: .zero)
@@ -30,6 +25,11 @@ class DetailCellPreferredLayout: UICollectionViewCell {
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         detailLabel.numberOfLines = 0
         return detailLabel
+    }()
+    lazy var widthConstraint: NSLayoutConstraint = {
+        let widthConstraint = contentView.widthAnchor.constraint(equalToConstant: contentView.bounds.width)
+        widthConstraint.isActive = true
+        return widthConstraint
     }()
     
     override init(frame: CGRect) {
@@ -60,42 +60,20 @@ class DetailCellPreferredLayout: UICollectionViewCell {
         detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        let attributes = super.preferredLayoutAttributesFitting(layoutAttributes)
-        if calcLayoutApproch == .contentViewSystemLayoutSizeFitting {
-            return doPreferredLayoutAttributesFitting(layoutAttributes)
-        }else {
-            return sumOfSubviewSize(layoutAttributes)
-        }
-    }
-    
 
-    
-    //MARK: Self Sizing Cell using contentViewSizeFiting
-    func doPreferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        //calc cell height - contentView.systemLayoutSizeFitting
-        layoutIfNeeded()
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        
-        //set cell height and width
-        layoutAttributes.frame.size.height = size.height
-        return layoutAttributes
+//    MARK: systemLayoutSizeFitting - self sizing cell using contentView.systemLayoutSizeFitting
+    override func systemLayoutSizeFitting(_ targetSize: CGSize) -> CGSize {
+        super.systemLayoutSizeFitting(targetSize)
+        widthConstraint.constant = bounds.size.width
+        return contentView.systemLayoutSizeFitting(targetSize)
     }
     
-    
-    func sumOfSubviewSize(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        //calc cell height - add up all subviews height of contentView
-        layoutIfNeeded()
-        let cellHeight = contentView.subviews.reduce(padding.top, {$0 + $1.bounds.height})
-        
-        //set cell height and width
-        layoutAttributes.frame.size.height = cellHeight
-        layoutAttributes.frame.size.width  = (superview?.bounds.width ?? 0) - 40
-        
-        return layoutAttributes
-    }
+//    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+//        super.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+//        widthConstraint.constant = bounds.size.width
+//        return contentView.systemLayoutSizeFitting(targetSize)
+//    }
 
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil

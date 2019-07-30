@@ -11,9 +11,13 @@ import UIKit
 
 class SelfSizingCellNibfileVC: UICollectionViewController, LoadImageService {
     var cellWidth: CGFloat {
-        return collectionView.bounds.width - 40
+        if UIDevice.current.orientation.isLandscape {
+            return (collectionView.bounds.width - 40) / 3
+        }else {
+            return collectionView.bounds.width - 40
+        }
+       
     }
-    var flowLayout: UICollectionViewFlowLayout
     var listOfItems: [String]
     var item: EventModel
     
@@ -22,8 +26,8 @@ class SelfSizingCellNibfileVC: UICollectionViewController, LoadImageService {
     init(listOfItems: [String], event: EventModel, flowLayout: UICollectionViewFlowLayout = StretchHeader()) {
         self.listOfItems = listOfItems
         self.item = event
-        self.flowLayout = flowLayout
-        super.init(collectionViewLayout: self.flowLayout)
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        super.init(collectionViewLayout: flowLayout)
         title = "Self Sizing Cell"
         
         //setup views
@@ -61,8 +65,9 @@ class SelfSizingCellNibfileVC: UICollectionViewController, LoadImageService {
     // MARK: rotation    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 10)
-        flowLayout.invalidateLayout()
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 10)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
