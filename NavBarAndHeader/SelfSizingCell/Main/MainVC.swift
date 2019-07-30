@@ -25,13 +25,11 @@ class MainVC: UICollectionViewController {
         "The Movie",
     ]
     var cellWidth: CGFloat {
-        return collectionView.bounds.width - 40
+        return collectionView.bounds.width
     }
-    var flowLayout: UICollectionViewFlowLayout
-
 
     init(flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()) {
-        self.flowLayout = flowLayout
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         super.init(collectionViewLayout: flowLayout)
         self.title = "CollectionView"
         
@@ -53,7 +51,6 @@ class MainVC: UICollectionViewController {
     }
     
     func setupViews() {
-        flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 100)
         collectionView.backgroundColor = .white
         collectionView.register(MainCell.self, forCellWithReuseIdentifier: MainCell.reuseIdentifier)
     }
@@ -104,8 +101,10 @@ class MainVC: UICollectionViewController {
     //MARK: rotation
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 100)
-        flowLayout.invalidateLayout()
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 10)
+            flowLayout.invalidateLayout()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

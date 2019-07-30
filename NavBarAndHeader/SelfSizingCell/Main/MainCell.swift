@@ -19,6 +19,11 @@ class MainCell: UICollectionViewCell {
         titleLabel.textColor = .black
         return titleLabel
     }()
+    lazy var widthConstraint: NSLayoutConstraint = {
+        let widthConstraint = self.contentView.widthAnchor.constraint(equalToConstant: self.bounds.size.width)
+        widthConstraint.isActive = true
+        return widthConstraint
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,18 +45,13 @@ class MainCell: UICollectionViewCell {
         titleLabel.fillSuperview(padding: padding)
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//        let layoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
-        
-        //calc cell height - contentView.systemLayoutSizeFitting
-        setNeedsLayout()
-        layoutIfNeeded()
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-
-        //set cell height and width
-        layoutAttributes.frame.size.height = size.height
-        return layoutAttributes
+    
+    //Self sizing cell
+    override func systemLayoutSizeFitting(_ targetSize: CGSize) -> CGSize {
+        widthConstraint.constant = self.contentView.bounds.size.width
+        return contentView.systemLayoutSizeFitting(targetSize)
     }
+
 
     override func prepareForReuse() {
         super.prepareForReuse()
